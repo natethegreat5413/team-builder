@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import './App.css'
 import { v4 as uuid } from 'uuid'
-import MemberForm from './Form'
-import Member from './Members'
+import Form from './components/Form'
+import Members from './components/Members'
 
 
-const initialMembersList = {
+const initialMembers = [{
   name: 'Joseph',
   email: 'joseph@gmail.com',
   role: 'Frontend Developer'
-}
+}]
 
 const initialFormValues = 
   {
@@ -20,7 +20,7 @@ const initialFormValues =
 
 
 export default function App() {
-  const [members, setMembers] = useState();
+  const [members, setMembers] = useState(initialMembers);
   const [formValues, setFormValues] = useState(initialFormValues);
 
   const onInputChange = evt => {
@@ -41,20 +41,20 @@ export default function App() {
       name: formValues.name,
       email: formValues.email,
       role: formValues.role === 'Frontend Developer' || 'Backend Developer' || 'FullStack Engineer'}
-  
-    }
-
-  setFormValues([ ...formValues, newMember])
+  setMembers([...members, newMember])
 
   setFormValues(initialFormValues)
-}
+    }
+
+  
+
   return (
     <div className="container">
         <header><h1>Team Builder</h1></header>
         {
-        initialFormValues.map(member => {
+        members.map(member => {
           return (
-            <Members key={initialFormValues.name} details={initialFormValues} />
+            <Members key={member.name} details={member} />
           )
         })
       }
@@ -66,4 +66,4 @@ export default function App() {
     </div>
     )
     
-  
+  }

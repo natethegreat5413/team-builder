@@ -9,7 +9,7 @@ function Members({ details }) {
             
             <h2>{details.name}</h2>
             <p>Email: {details.email}</p>
-            <p>Role: {detail.role}</p>
+            <p>Role: {details.role}</p>
         </div>
     )
 }
