@@ -6,9 +6,9 @@ import Members from './components/Members'
 
 
 const initialMembers = [{
-  name: 'Joseph',
-  email: 'joseph@gmail.com',
-  role: 'Frontend Developer'
+  name: 'David',
+  email: 'david@gmail.com',
+  role: 'Janitor'
 }]
 
 const initialFormValues = 
@@ -18,30 +18,30 @@ const initialFormValues =
     role: '',
   }
 
-
+  
 export default function App() {
   const [members, setMembers] = useState(initialMembers);
   const [formValues, setFormValues] = useState(initialFormValues);
 
   const onInputChange = evt => {
-    const name = evt.target.name
-    const value = evt.target.value
-
-    setFormValues({
-      ...formValues,
-      [name]: value
-    })
+    const {name} = evt.target
+    const {value} = evt.target
+    
+    setFormValues({ ...formValues, [name]: value})
+    
   }
 
   const onSubmit = evt => {
     evt.preventDefault();
 
-    const newMember = {
-      id: uuid(),
-      name: formValues.name,
-      email: formValues.email,
-      role: formValues.role === 'Frontend Developer' || 'Backend Developer' || 'FullStack Engineer'}
-  setMembers([...members, newMember])
+    if(!formValues.name.trim() || !formValues.email.trim() || !formValues.role.trim()){
+      return 'Must have Input'
+    }
+
+    const newMember = { ...formValues, id: uuid()}
+      
+    
+  setMembers([newMember, ...members])
 
   setFormValues(initialFormValues)
     }
@@ -51,18 +51,19 @@ export default function App() {
   return (
     <div className="container">
         <header><h1>Team Builder</h1></header>
+        <Form 
+        values={formValues}
+        onInputChange={onInputChange}
+        onSubmit={onSubmit}
+      />
         {
         members.map(member => {
           return (
-            <Members key={member.name} details={member} />
+            <Members key={member.id} details={member} />
           )
         })
       }
-      <Form 
-      values={formValues}
-      onInputChange={onInputChange}
-      onSubmit={onSubmit}
-      />
+      
     </div>
     )
     

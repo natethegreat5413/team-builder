@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 
 function MemberForm(props){
@@ -10,38 +10,46 @@ function MemberForm(props){
     } = props
 
 return(
-    <form className='member container'>
-    <h2>Member Form</h2>
+    <form className='member container' onSubmit={onSubmit}>
+        <h2>Member Form</h2>
     {/*////////TEXT INPUTS////////*/}
-    <label>Name:&nbsp;
-    <input 
-    value={values.name}
-    onChange={onInputChange}
-    name='name'
-    type='text'
-    /></label>
-
+        <label>Name:&nbsp;
+            <input 
+            value={values.name}
+            onChange={onInputChange}
+            name='name'
+            type='text'
+            placeholder='Name goes here'
+        /></label>
+<br/>
     <label>Email:&nbsp;
-    <input
-    value={values.email}
-    onChange={onInputChange}
-    name='email'
-    type='text'
-    /></label>
-
+        <input
+        value={values.email}
+        onChange={onInputChange}
+        name='email'
+        type='text'
+        placeholder='Email goes here'
+        />
+    </label>
+<br/>
     {/* ///////DROPDOWN/////// */}
     <label>Role:&nbsp;
-    <select
-    value={values.role}
-    onChange={onInputChange}
-    name='role'
-    >
-    <option value='Frontend Developer'>Frontend Developer</option>
-    <option value='Backend Developer'>Backend Developer</option>
-    <option value='FullStack Engineer'>FullStack Engineer</option>
-    </select></label>
-    
-    <button onClick={onSubmit}>submit</button>
+
+        <select value={values.role} onChange={onInputChange} name='role'>
+        
+            <option value=''>Select a Position</option>
+            <option value='Frontend Developer'>Frontend Developer</option>
+            <option value='Backend Developer'>Backend Developer</option>
+            <option value='FullStack Engineer'>FullStack Engineer</option>
+            <option value='Janitor'>Janitor</option>
+            <option value='CEO'>CEO</option>
+            <option value='UX Design'>UX Design</option>
+
+        </select>
+
+    </label>
+
+    <button>Submit</button>
     </form>
     )
 }
